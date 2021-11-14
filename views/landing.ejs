@@ -1,0 +1,55 @@
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Logo -->
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+
+        <% if (title=='landing' ){ %>
+            <li class="nav-item active">
+                <% } else { %>
+            <li class="nav-item">
+                <% } %>
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+            </li>
+
+    </ul>
+    <div>
+        <ul>
+            <a href="/about" id="list" class="btn btn-primary">Incident Record List</a>
+    </div>
+    </ul>
+    </div>
+
+</nav>
+
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-md-3">Image goes here</div>
+        <div class="col-md-3">Description goes here</div>
+
+        <!-- link to create incident page -->
+        <div id="create" class="col-md-6">
+            <h1>Welcome to the Landing Page</a></h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-3">Description goes here</div>
+        <div class="col-md-3">Image goes here</div>
+        <div class="col-md-6">
+            <p><a href="/landing" class="btn btn-primary">Create New Incident Report</a></p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="navbar fixed-bottom navbar-dark bg-dark">
+                <span class="navbar-brand display-6 navbar-text">
+                    <h6>&nbsp;&copy; Copyright - RunTime COMP229 11-2021.</h4>
+                </span>
+            </div>
+        </div>
+    </div>
+</footer>

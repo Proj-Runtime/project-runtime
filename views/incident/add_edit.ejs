@@ -1,0 +1,101 @@
+<%- include ../partials/header.ejs %>
+
+<!-- Content for the Add_Edit page -->
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <div class="form-group">
+                    <input type="hidden"
+                        name="id"
+                        value="<%= incident._id %>"
+                    >
+                    <label for="incidentTextField">Title</label>
+                    <input type="text" class="form-control"
+                        id="incidentTextField"
+                        placeholder="Enter the Description"
+                        name="Description" 
+                        value="<%= incident.Description %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="incidentTextField">Description</label>
+                    <input type="text" class="form-control"
+                        id="incidentTextField"
+                        placeholder="Enter the Priority"
+                        name="Priority" 
+                        value="<%= incident.Priority %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="incidentTextField">Description</label>
+                    <input type="text" class="form-control"
+                        id="incidentTextField"
+                        placeholder="Enter the Narrative"
+                        name="Narrative" 
+                        value="<%= incident.Narrative %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="incidentTextField">Author</label>
+                    <input type="text" class="form-control"
+                        id="incidentTextField"
+                        placeholder="Enter the Requester Name"
+                        name="RequesterName" 
+                        value="<%= incident.RequesterName %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="incidentTextField">Genre</label>
+                    <input type="text" class="form-control"
+                        id="incidentTextField"
+                        placeholder="Enter the Technician"
+                        name="Technician" 
+                        value="<%= incident.Technician %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="incidentTextField">Author</label>
+                    <input type="text" class="form-control"
+                        id="incidentTextField"
+                        placeholder="Enter the Status"
+                        name="Status" 
+                        value="<%= incident.Status %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="incidentTextField">Author</label>
+                    <input type="text" class="form-control"
+                        id="incidentTextField"
+                        placeholder="Enter the CreatedDate"
+                        name="CreatedDate" 
+                        value="<%= incident.CreatedDate %>"
+                        required>
+                </div>
+                <br />
+
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-edit"></i> 
+                    Submit
+                </button>
+                
+                <a href="/incident/list" class="btn btn-warning">
+                    <i class="fas fa-undo"></i> 
+                    Cancel
+                </a>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<%- include ../partials/footer.ejs %>
