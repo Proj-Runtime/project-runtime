@@ -8,7 +8,7 @@
       <% for(var i in messages) { %>
       <div class="flash"><%= messages[i] %></div>
       <% } %>
-      <form action="/users/signup" method="post" validate>
+      <form action="/auth/signup" method="post" validate>
         <div class="form-group">
           <label>First Name:</label>
           <input

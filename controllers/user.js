@@ -1,5 +1,13 @@
+/*    
+  Assignment 2
+  Author: Ducarmel Zephyr
+  Date: October 23 2021
+  Filename: controllers/user.js
+*/
+
 let User = require("../models/user");
 let passport = require("passport");
+let local = require("passport-local");
 
 function getErrorMessage(err) {
   console.log("===> Erro: " + err);
@@ -70,7 +78,7 @@ module.exports.signup = function (req, res, next) {
           user: user,
         });
       }
-      req.login(user, (err) => {
+      req.signin(user, (err) => {
         if (err) return next(err);
         return res.redirect("/");
       });
@@ -88,7 +96,7 @@ module.exports.signout = function (req, res, next) {
 module.exports.signin = function (req, res, next) {
   passport.authenticate("local", {
     successRedirect: req.session.url || "/",
-    failureRedirect: "/users/signin",
+    failureRedirect: "/auth/signin",
     failureFlash: true,
   })(req, res, next);
   delete req.session.url;

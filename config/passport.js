@@ -1,4 +1,4 @@
-const passport = require("passport");
+//var passport = require("passport");
 
 module.exports = function () {
   const User = require("../models/user");
