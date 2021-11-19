@@ -26,7 +26,7 @@ router.post("/signup", usersController.signup);
 router.get("/signin", usersController.renderSignin);
 router.post("/signin", usersController.signin);
 router.get("/auth/signin", usersController.renderSignin);
-router.post("/auth/signin", usersController.signin);
+router.post("/signin", usersController.signin);
 
 //router.get("/signout", usersController.signout);
 

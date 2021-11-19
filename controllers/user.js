@@ -96,7 +96,7 @@ module.exports.signout = function (req, res, next) {
 module.exports.signin = function (req, res, next) {
   passport.authenticate("local", {
     successRedirect: req.session.url || "/",
-    failureRedirect: "/auth/signin",
+    failureRedirect: "auth/signin",
     failureFlash: true,
   })(req, res, next);
   delete req.session.url;
