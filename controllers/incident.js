@@ -1,3 +1,9 @@
+/*
+  Student ID: 301145757 , 301143620 , 301173877 , 301178658 , 301182897 , 300977318
+  Web App Name: Runtime
+  Description: An Incident Management Application
+*/
+
 // create a reference to the model
 let Incident = require('../models/incident');
 
@@ -12,7 +18,8 @@ module.exports.incidentList = function(req, res, next) {
         {
             res.render('incident/list', {
                 title: 'Incident List', 
-                incidents: incidentList
+                incidents: incidentList,
+                username: req.user ? req.user.username : ''
             })            
         }
     });
@@ -34,7 +41,8 @@ module.exports.details = (req, res, next) => {
             //show the edit view
             res.render('incident/details', {
                 title: 'Incident Details', 
-                incident: incidentToShow
+                incident: incidentToShow,
+                username: req.user ? req.user.username : ''
             })
         }
     });
@@ -43,7 +51,7 @@ module.exports.details = (req, res, next) => {
 // Renders the Add form using the add_edit.ejs template
 module.exports.displayAddPage = (req, res, next) => {
     let newIncident = Incident();
-    res.render('incident/add_edit', {title: 'Add Incident', incident:newIncident})          
+    res.render('incident/add_edit', {title: 'Add Incident Report', incident:newIncident, username: req.user ? req.user.username : ''})          
 }
 
 
@@ -59,21 +67,49 @@ module.exports.processAddPage = (req, res, next) => {
         Status: req.body.Status,
         CreatedDate: req.body.CreatedDate,
     });
+    
+    let currentDate = new Date();
+    let day = currentDate.getDate().toString();
+    let month = (currentDate.getMonth() + 1).toString();
+    let year = currentDate.getFullYear().toString().substr(-2);
+    let newTicketNumber;
 
-    Incident.create(newIncident, (err, Incident) =>{
-        if(err)
-        {
+    Incident.findOne({}, {}, { sort: { 'recordNumber' : -1 } }, function(err, result) {
+        if(err){
             console.log(err);
             res.end(err);
         }
-        else
-        {
-            // refresh the incident list
-            res.redirect('/incident/list');
-        }
-    });
+        else{
+            const zeroPad = (num, places) => String(num).padStart(places, '0');
+            if (result == null || result.recordNumber == null || result.recordNumber == "undefined"){
+                newTicketNumber = zeroPad(1, 7);
+            } else {
+                let recordNumber = result.recordNumber.toString();
+                let extractedLastNumber = parseInt(recordNumber.substring(recordNumber.length - 7));
+                newTicketNumber = zeroPad(extractedLastNumber + 1, 7);
+            }
 
-}
+            newIncident.recordNumber = day + month + year + "-" + newTicketNumber;
+
+            let createdStr = "Created at " + getcurrentTimestamp() +"; ";
+            newIncident.narrativeLatest = createdStr;
+            newIncident.narrative = createdStr;
+
+            Incident.create(newIncident, (err, Incident) =>{
+                if(err)
+                {
+                    console.log(err);
+                    res.end(err);
+                }
+                else
+                {
+                    // refresh the incident list
+                    res.redirect('/incident/list');
+                }
+            });
+        }
+    });    
+};
 
 // Gets a incident by id and renders the Edit form using the add_edit.ejs template
 module.exports.displayEditPage = (req, res, next) => {
@@ -88,7 +124,7 @@ module.exports.displayEditPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('incident/add_edit', {title: 'Edit Incident', incident: incidentToEdit})
+            res.render('incident/add_edit', {title: 'Edit Incident Report', incident: incidentToEdit, username: req.user ? req.user.username : ''})
         }
     });
 }
