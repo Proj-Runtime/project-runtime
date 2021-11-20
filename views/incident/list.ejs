@@ -19,6 +19,7 @@
             <table class="table table-bordered table-striped table-hover">
                 <!-- Header Row-->
                 <tr>
+                    <th class="text-center">Record Number</th>
                     <th class="text-center">Description</th>
                     <th class="text-center">Priority</th>
                     <th class="text-center">Narrative</th>                    
@@ -38,6 +39,7 @@
                                 <%= incidents[count].Title %>
                             </a>
                         </td>
+                        <td class="text-center"><%= incidentList[count].recordNumber %></td>
                         <td class="text-center"><%= incidents[count].Description %></td>
                         <td class="text-center"><%= incidents[count].Priority %></td>
                         <td class="text-center"><%= incidents[count].RequesterName %></td>
