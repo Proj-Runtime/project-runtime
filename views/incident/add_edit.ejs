@@ -7,6 +7,14 @@
             <h1><%= title %></h1>
 
             <form class="form" method="POST">
+            
+                <div class="form-group">
+                    <label for="customerInfo" class="labelList">Record Number</label>
+                    <input type="text" class="form-control" id="recordNumber" name="recordNumber"
+                        value="<%= incident.recordNumber %>" readonly><i class="fas fa-list-ol fa-lg"></i>
+                </div>
+            
+            
                 <div class="form-group">
                     <input type="hidden"
                         name="id"
