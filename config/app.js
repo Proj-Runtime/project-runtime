@@ -25,17 +25,13 @@ let dbURI = require("./db");
 let jwt = require("jsonwebtoken");
 
 // Connect to the Database
-mongoose.connect(dbURI.AtplasDB);
+mongoose.connect(dbURI.AtlasDB);
 
 let mongoDB = mongoose.connection;
 mongoDB.on("error", console.error.bind(console, "Connection Error:"));
 mongoDB.once("open", () => {
   console.log("Connected to MongoDB...");
 });
-
-let indexRouter = require("../routes/index");
-let incidentRouter = require("../routes/incident");
-let authRouter = require("../routes/users");
 
 let app = express();
 
@@ -66,10 +62,15 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+let indexRouter = require("../routes/index");
+let incidentRouter = require("../routes/incident");
+let authRouter = require("../routes/users");
+
 // passport user configuration
 const User = require("../models/user");
 const LocalStrategy = require("passport-local").Strategy;
-passport.use(new LocalStrategy(User.authenticate()));
+//passport.use(new LocalStrategy(User.authenticate()));
+passport.use(User.createStrategy());
 
 //optional but
 let compress = require("compression");
@@ -85,8 +86,8 @@ let ExtractJWT = passportJWT.ExtractJwt;
 //optional but
 
 // serialize and deserialize the User info
-//passport.serializeUser(User.serializeUser());
-//passport.deserializeUser(User.deserializeUser()); // verify that the token sent by the user - check if valid
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser()); // verify that the token sent by the user - check if valid
 
 passport.serializeUser(User.serializeUser()); //.serializeUser());
 passport.deserializeUser(User.deserializeUser()); //.deserializeUser());
