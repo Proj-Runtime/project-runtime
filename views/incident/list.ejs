@@ -1,14 +1,17 @@
+<!--
+  Student ID: 301145757 , 301143620 , 301173877 , 301178658 , 301182897 , 300977318
+  Web App Name: Runtime
+  Description: An Incident Management Application
+-->
+
 <%- include ../partials/header.ejs %>
 
   <!-- Main Content -->
   <main class="container">
-    <div class="row">
-        <h1><%= title %></h1>
+    <div>
+        <h1 class="text-center pt-5 pb-3"><%= title %></h1>
         <br>
-        <div>
-            <!-- ------------------------ -->
-            <!-- Fix the ADD button below -->
-            <!-- ------------------------ -->
+        <div class="text-end">
             <a href="/incident/add" class="btn btn-primary align-self-end" role="button">
                 <i class="fas fa-plus-circle"></i> 
                 Add a new Item
@@ -19,11 +22,10 @@
             <table class="table table-bordered table-striped table-hover">
                 <!-- Header Row-->
                 <tr>
-                    <th class="text-center">Record Number</th>
                     <th class="text-center">Description</th>
-                    <th class="text-center">Priority</th>
-                    <th class="text-center">Narrative</th>                    
+                    <th class="text-center">Priority</th>                
                     <th class="text-center">Requester Name</th>
+                    <th class="text-center">Narrative</th>    
                     <th class="text-center">Technician</th>
                     <th class="text-center">Status</th>
                     <th class="text-center">CreatedDate</th>
@@ -34,35 +36,25 @@
 
                 <% for(let count = 0; count < incidents.length; count++) { %>
                     <tr>
-                        <td class="text-center">
-                            <a href="/incident/details/<%= incidents[count]._id %>">
-                                <%= incidents[count].Title %>
-                            </a>
-                        </td>
-                        <td class="text-center"><%= incidentList[count].recordNumber %></td>
                         <td class="text-center"><%= incidents[count].Description %></td>
                         <td class="text-center"><%= incidents[count].Priority %></td>
                         <td class="text-center"><%= incidents[count].RequesterName %></td>
+                        <td class="text-center"><%= incidents[count].Narrative %></td>
                         <td class="text-center"><%= incidents[count].Technician %></td>
                         <td class="text-center"><%= incidents[count].Status %></td>
                         <td class="text-center"><%= incidents[count].CreatedDate %></td>
                         
                         <td class="text-center">
-                            <!-- ------------------------- -->
-                            <!-- Fix the EDIT button below -->
-                            <!-- ------------------------ -->
                             <a href="/incident/edit/<%= incidents[count]._id %>" class="btn btn-primary btn-sm">
                             <i class="fas fa-pencil-alt"></i>Edit</a>
                         </td>
                         <td class="text-center">
-                            <!-- --------------------------- -->
-                            <!-- Fix the DELETE button below -->
-                            <!-- --------------------------- -->
                             <a href="/incident/delete/<%= incidents[count]._id %>" class="btn btn-danger btn-sm">
                             <i class="fas fa-trash-alt"></i>Delete</a>
                         </td>
                     </tr>
-                <% } %>
+                <% 
+            } %>
             </table>
         </div>
     </div>

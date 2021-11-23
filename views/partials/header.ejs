@@ -1,3 +1,9 @@
+<!--
+  Student ID: 301145757 , 301143620 , 301173877 , 301178658 , 301182897 , 300977318
+  Web App Name: Runtime
+  Description: An Incident Management Application
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,54 +13,45 @@
   <title><%= title %></title>
   <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
   <link rel='stylesheet' href='/@fortawesome/fontawesome-free/css/all.min.css' />
-  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheet/style.css">
 </head>
-<body>
+<body class="bg-light">
   <!-- Main Nav bar  -->  
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="/images/image_logo.JPG" alt="logo" style="width:40px;">
+      <a class="navbar-brand" href="/">
+        <img src="/assets/images/team_logo.png" alt="logo">
       </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ms-auto mb-2">
           <ul class="navbar-nav">
+
             <li class="nav-item">
               <% if (title == "Home") { %>
-                  <a class="nav-link active" href="/">
+                <a class="nav-link active" href="/">
               <% } else { %>
-                  <a class="nav-link" href="/">
+                <a class="nav-link" href="/">
               <% } %>            
-                  <i class="fas fa-home"></i> Home </a>
+                <i class="fas fa-home"></i> Home </a>
               </a>
             </li>   
-            <li class="nav-item dropdown">
-              <% if (title == "incident List" || title == "Add a new incident") { %>
-                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="fas fa-incident"></i> Incident
-                </a>
+
+            <li class="nav-item">
+              <% if (title == "Incident List") { %>
+                <a class="nav-link active" href="/incident/list">
               <% } else { %>
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="fas fa-incident"></i> Incident
-                </a>
-              <% } %>       
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/incident/list">Incident List</a></li>
-                <li><a class="dropdown-item" href="/incident/add">Add a new Incident</a></li>
-              </ul>
-            </li>
-                      
-            <li class="nav-item">  
-              <% if (typeof userName == 'string' && userName) { %>
-                <a class="nav-link" href="/auth/signout" onclick="return confirm('Are you sure?')">Sign Out (<%= userName %>)</a>
-              <% } else { %>
-                <a class="nav-link" href="../auth/signin">Signin</a>
+                <a class="nav-link" href="/incident/list">
               <% } %>            
-            </li>             
+                <i class="fas fa-th-list"></i> Incident Report List </a>
+                </a>
+            </li>   
           </ul>
-        </div>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>

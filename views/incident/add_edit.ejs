@@ -1,92 +1,90 @@
+<!--
+  Student ID: 301145757 , 301143620 , 301173877 , 301178658 , 301182897 , 300977318
+  Web App Name: Runtime
+  Description: An Incident Management Application
+-->
+
 <%- include ../partials/header.ejs %>
 
 <!-- Content for the Add_Edit page -->
 <div class="container">
     <div class="row">
         <div class="offset-md-3 col-md-6">
-            <h1><%= title %></h1>
+            <h1 class="text-center pt-5 pb-3"><%= title %></h1>
 
             <form class="form" method="POST">
-            
-                <div class="form-group">
-                    <label for="customerInfo" class="labelList">Record Number</label>
-                    <input type="text" class="form-control" id="recordNumber" name="recordNumber"
-                        value="<%= incident.recordNumber %>" readonly><i class="fas fa-list-ol fa-lg"></i>
-                </div>
-            
-            
                 <div class="form-group">
                     <input type="hidden"
                         name="id"
                         value="<%= incident._id %>"
                     >
-                    <label for="incidentTextField">Title</label>
+                    <label for="requestTextField">Customer Name</label>
                     <input type="text" class="form-control"
-                        id="incidentTextField"
-                        placeholder="Enter the Description"
-                        name="Description" 
-                        value="<%= incident.Description %>"
-                        required>
-                </div>
-                <br />
-                <div class="form-group">
-                    <label for="incidentTextField">Description</label>
-                    <input type="text" class="form-control"
-                        id="incidentTextField"
-                        placeholder="Enter the Priority"
-                        name="Priority" 
-                        value="<%= incident.Priority %>"
-                        required>
-                </div>
-                <br />
-                <div class="form-group">
-                    <label for="incidentTextField">Description</label>
-                    <input type="text" class="form-control"
-                        id="incidentTextField"
-                        placeholder="Enter the Narrative"
-                        name="Narrative" 
-                        value="<%= incident.Narrative %>"
-                        required>
-                </div>
-                <br />
-                <div class="form-group">
-                    <label for="incidentTextField">Author</label>
-                    <input type="text" class="form-control"
-                        id="incidentTextField"
-                        placeholder="Enter the Requester Name"
+                        id="requestTextField"
+                        placeholder="Enter first and last name."
                         name="RequesterName" 
                         value="<%= incident.RequesterName %>"
                         required>
                 </div>
                 <br />
                 <div class="form-group">
-                    <label for="incidentTextField">Genre</label>
+                    <label for="descTextField">Description</label>
                     <input type="text" class="form-control"
-                        id="incidentTextField"
-                        placeholder="Enter the Technician"
+                        id="descTextField"
+                        placeholder="Enter the incident description."
+                        name="Description" 
+                        value="<%= incident.Description %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="narTextField">Narrative</label>
+                    <input type="text" class="form-control"
+                        id="narTextField"
+                        placeholder="Enter the incident narrative."
+                        name="Narrative" 
+                        value="<%= incident.Narrative %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="priorityTextField">Priority</label>
+                    <input type="text" class="form-control"
+                        id="priorityTextField"
+                        placeholder="Enter the priority."
+                        name="Priority" 
+                        value="<%= incident.Priority %>"
+                        readonly>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="techTextField">Technician</label>
+                    <input type="text" class="form-control"
+                        id="techTextField"
+                        placeholder="Enter the technician name."
                         name="Technician" 
                         value="<%= incident.Technician %>"
                         required>
                 </div>
                 <br />
                 <div class="form-group">
-                    <label for="incidentTextField">Author</label>
+                    <label for="statTextField">Status</label>
                     <input type="text" class="form-control"
-                        id="incidentTextField"
-                        placeholder="Enter the Status"
+                        id="statTextField"
+                        placeholder="Enter the status of the incident."
                         name="Status" 
                         value="<%= incident.Status %>"
-                        required>
+                        readonly>
                 </div>
                 <br />
                 <div class="form-group">
-                    <label for="incidentTextField">Author</label>
+                    <label for="dateTextField">Date</label>
                     <input type="text" class="form-control"
-                        id="incidentTextField"
+                        id="dateTextField"
                         placeholder="Enter the CreatedDate"
                         name="CreatedDate" 
                         value="<%= incident.CreatedDate %>"
-                        required>
+                        readonly>
                 </div>
                 <br />
 
