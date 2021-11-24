@@ -7,56 +7,69 @@
 <%- include ../partials/header.ejs %>
 
   <!-- Main Content -->
-  <main class="container">
-    <div>
-        <h1 class="text-center pt-5 pb-3"><%= title %></h1>
-        <br>
-        <div class="text-end">
-            <a href="/incident/add" class="btn btn-primary align-self-end" role="button">
-                <i class="fas fa-plus-circle"></i> 
-                Add a new Item
-            </a>                
+<div class="mx-5 my-4 bg-white rounded-3">
+    <main class="text-dark">
+        <div class="mx-3">
+            <h1 class="text-center pt-3 pb-0 mb-0"><%= title %></h1>
+            <div class="text-end">
+                <a href="/incident/add" class="btn btn-warning align-self-end" role="button">
+                    <i class="fas fa-plus-circle"></i> 
+                    New Incident
+                </a>     
+                
+                <a href="/incident/add" class="btn btn-warning align-self-end" role="button">
+                    <i class="fas fa-times-circle"></i>
+                    Past Incident
+                </a>    
+            </div>
+
+            <div class="table-responsive mt-1">
+                <table class="table table-hover table-sm tablePadding">
+                    <thead class="fontSizeHead">
+                        <!-- Header Row-->
+                        <tr class="table-secondary" >
+                            <th class="text-center">Record ID</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Narrative</th> 
+                            <th class="text-center">Requester Name</th> 
+                            <th class="text-center">Priority</th>
+                            <th class="text-center">Technician</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Created Date</th>
+                            <th class="text-center" colspan="2"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="fontSizeBody">
+                        <!-- Repeatable Template Row -->
+                        <% for(let count = 0; count < incidents.length; count++) { %>
+                            <tr>
+                                <td class="text-center"><%= incidents[count].RecordNumber %></td>
+                                <td class="text-center"><%= incidents[count].Description %></td>
+                                <td class="text-center"><%= incidents[count].Narrative %></td>
+                                <td class="text-center"><%= incidents[count].RequesterName %></td>
+                                <td class="text-center"><%= incidents[count].Priority %></td>
+                                <td class="text-center"><%= incidents[count].Technician %></td>
+                                <td class="text-center"><%= incidents[count].Status %></td>
+                                <td class="text-center"><%= incidents[count].CreatedDate.toLocaleDateString(undefined, 
+                                    { year: 'numeric', month: 'long', day: 'numeric'}
+                                ) %></td>
+                                
+                                <td class="text-center">
+                                    <a href="/incident/edit/<%= incidents[count]._id %>" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-pencil-alt"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="/incident/delete/<%= incidents[count]._id %>" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover">
-                <!-- Header Row-->
-                <tr>
-                    <th class="text-center">Description</th>
-                    <th class="text-center">Priority</th>                
-                    <th class="text-center">Requester Name</th>
-                    <th class="text-center">Narrative</th>    
-                    <th class="text-center">Technician</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">CreatedDate</th>
-                    <th class="text-center" colspan="2">Actions</th>
-                </tr>
-
-                <!-- Repeatable Template Row -->
-
-                <% for(let count = 0; count < incidents.length; count++) { %>
-                    <tr>
-                        <td class="text-center"><%= incidents[count].Description %></td>
-                        <td class="text-center"><%= incidents[count].Priority %></td>
-                        <td class="text-center"><%= incidents[count].RequesterName %></td>
-                        <td class="text-center"><%= incidents[count].Narrative %></td>
-                        <td class="text-center"><%= incidents[count].Technician %></td>
-                        <td class="text-center"><%= incidents[count].Status %></td>
-                        <td class="text-center"><%= incidents[count].CreatedDate %></td>
-                        
-                        <td class="text-center">
-                            <a href="/incident/edit/<%= incidents[count]._id %>" class="btn btn-primary btn-sm">
-                            <i class="fas fa-pencil-alt"></i>Edit</a>
-                        </td>
-                        <td class="text-center">
-                            <a href="/incident/delete/<%= incidents[count]._id %>" class="btn btn-danger btn-sm">
-                            <i class="fas fa-trash-alt"></i>Delete</a>
-                        </td>
-                    </tr>
-                <% 
-            } %>
-            </table>
-        </div>
-    </div>
-  </main>
+    </main>
+</div>
+  
 <%- include ../partials/footer.ejs %>
