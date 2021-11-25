@@ -4,18 +4,25 @@
   Description: An Incident Management Application
 */
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+
+//modules for authentication
+let session = require('express-session');
+let passport = require('passport');
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
 
 //Database setup
 let mongoose = require('mongoose');
 let dbURI = require('./db');
 
 // Connect to the Database
-mongoose.connect(dbURI.AtlasDB);
+mongoose.connect(dbURI.AtlasDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
@@ -23,10 +30,10 @@ mongoDB.once('open', ()=>{
   console.log('Connected to MongoDB...');
 });
 
-var indexRouter = require('../routes/index');
-var incidentRouter = require('../routes/incident');
+let indexRouter = require('../routes/index');
+let incidentRouter = require('../routes/incident');
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -38,6 +45,33 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../node_modules')));
+
+// setup express session
+app.use(session({
+  secret:"SomeSecret",
+  saveUninitialized: false,
+  resave: false
+}));
+
+// initialize flash
+app.use(flash());
+
+//initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport user configuration
+
+// create a User Model instance
+let userModel = require('../models/user');
+let User = userModel.User;
+
+//implement a User Authentication Strategy
+passport.use(User.createStrategy());
+
+//serialize and deserialize the user Info
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use('/', indexRouter);
 app.use('/incident', incidentRouter);

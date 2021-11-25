@@ -14,7 +14,7 @@ let userModel = require('../models/user');
 let User = userModel.User;
 
 exports.home = function(req, res, next) {
-  res.render('index', { title: 'Home', username: req.user ? req.user.username : '' });
+    res.render('index', { title: 'Home', username: req.user ? req.user.username : '' });
 };
 
 // Display the Login page
@@ -22,16 +22,16 @@ module.exports.displayLoginPage = (req, res, next) => {
   //check if user is already logged in
   if(!req.user)
   {
-    res.render('auth/login',
-    {
-      title: "login",
-      messages: req.flash('loginMessage'),
-      username: req.user ? req.user.username : ''
-    })
+      res.render('auth/login',
+      {
+          title: "login",
+          messages: req.flash('loginMessage'),
+          username: req.user ? req.user.username : ''
+      })
   }
   else
   {
-    return res.redirect('/');
+      return res.redirect('/');
   }
 }
 
@@ -39,25 +39,25 @@ module.exports.displayLoginPage = (req, res, next) => {
 module.exports.processLoginPage = (req, res, next) => {
   passport.authenticate('local',
   (err, user, info) => {
-    // server err
-    if(err)
-    {
-      return next(err);
-    }
-    // if user login error
-    if(!user)
-    {
-      req.flash('loginMessage', 'Authentication Error');
-      return res.redirect('/login');
-    }
-    req.login(user, (err) => {
-      //server error
+      // server err
       if(err)
       {
-        return next(err);
+          return next(err);
       }
-      return res.redirect('/')
-    });
+      // if user login error
+      if(!user)
+      {
+          req.flash('loginMessage', 'Authentication Error');
+          return res.redirect('/login');
+      }
+      req.login(user, (err) => {
+          //server error
+          if(err)
+          {
+              return next(err);
+          }
+          return res.redirect('/')
+      });
   })(req, res, next);    
 }
 
@@ -66,16 +66,16 @@ module.exports.displayRegisterPage = (req, res, next) => {
   //if user is not logged in
   if(!req.user)
   {
-    res.render('auth/register',
-    {
-      title: 'Register',
-      messages: req.flash('registerMessage'),
-      username: req.user ? req.user.username : ''
-    });
+      res.render('auth/register',
+      {
+          title: 'Register',
+          messages: req.flash('registerMessage'),
+          username: req.user ? req.user.username : ''
+      });
   }
   else
   {
-    return res.redirect('/');
+      return res.redirect('/');
   }
 }
 
@@ -83,39 +83,39 @@ module.exports.displayRegisterPage = (req, res, next) => {
 module.exports.processRegisterPage = (req, res, next) => {
   //instantiate user object
   let newUser = new User({
-    username: req.body.username,
-    email: req.body.email,
-    userType: req.body.userType
+      username: req.body.username,
+      email: req.body.email,
+      userType: req.body.userType
   });
 
-User.register(newUser, req.body.password, (err) => {
-  if (err)
-  {
-    console.log("Error: Inserting New User");
-    if(err.name == "UserExistsError")
-    {
-      req.flash(
-        'registerMessage',
-        'Registration Error: User Already Exists!'
-      );
-      console.log('Error: User Already Exists')
-    }
-    return res.render('auth/register', 
-    {
-      title: 'Register',
-      messages: req.flash('registerMessage'),
-      username: req.user ? req.user.username : ''
-    });
-  }
-  else
-  {
-    // if no error, registration successful
-    return passport.authenticate('local')(req, res, () => {
-      //redirect to /login
-      res.redirect('/')
-    });
-  }
-});
+  User.register(newUser, req.body.password, (err) => {
+      if (err)
+      {
+          console.log("Error: Inserting New User");
+          if(err.name == "UserExistsError")
+          {
+              req.flash(
+                  'registerMessage',
+                  'Registration Error: User Already Exists!'
+              );
+              console.log('Error: User Already Exists')
+          }
+          return res.render('auth/register', 
+          {
+              title: 'Register',
+              messages: req.flash('registerMessage'),
+              username: req.user ? req.user.username : ''
+          });
+      }
+      else
+      {
+          // if no error, registration successful
+          return passport.authenticate('local')(req, res, () => {
+              //redirect to /login
+              res.redirect('/')
+          });
+      }
+  });
 }
 
 // Performs Logout

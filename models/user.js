@@ -4,20 +4,43 @@
   Description: An Incident Management Application
 */
 
-// importing modules
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var passportLocalMongoose = require("passport-local-mongoose");
+// require modules for the User model 
+let mongoose = require('mongoose');
+let passportLocalMongoose = require('passport-local-mongoose');
 
-var UserSchema = new Schema({
-  firstname: { type: String, unique: false }, //required: true, unique: false },
-  lastName: { type: String, unique: false }, //required: true, unique: false },
-  email: { type: String, unique: true }, //required: true, unique: true },
-  username: { type: String, unique: true }, //unique: true, required: true },
-});
+let User = mongoose.Schema(
+    {
+        username:
+        {
+            type: String,
+            default: '',
+            trim: true,
+            required: 'username is required'
+        },
+        email:
+        {
+        type: String,
+            default: '',
+            trim: true,
+            required: 'email is required'
+        },
+        userType:
+        {
+            type: String,
+            default: '',
+            trim: true,
+            required: 'usertype is required'
+        }
+    },
+    {
+        collection: "users"
+    }
+);
 
-// plugin for passport-local-mongoose
-UserSchema.plugin(passportLocalMongoose);
+//configure options for User Model
 
-// export userschema
-module.exports = mongoose.model("User", UserSchema);
+let options = ({ missingPasswordError: 'Wrong / Missing Password'});
+
+User.plugin(passportLocalMongoose, options);
+
+module.exports.User = mongoose.model('User', User);
