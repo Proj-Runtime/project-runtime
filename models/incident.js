@@ -19,7 +19,10 @@ let incidentModel = mongoose.Schema(
         RequesterName: String,
         RecordNumber: String,     // e.g. 130418-0000001 for Apr 13 2018, ticket no 1
         Narrative: String,          // e.g. 25/10/2020 - Changed status "normal" to "high"; 6/11/2020 - Ticket closed
-        Technician: String,
+        Technician: {
+            type: String,
+            default: "Unassigned"
+        },
         Status: {
             type: String,
             default: "New",         // e.g. New, In Progress, Closed
