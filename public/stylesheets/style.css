@@ -71,3 +71,8 @@ a{
 .fontSizeBody {
   font-size: 14px;
 }
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; 
+}

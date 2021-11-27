@@ -6,48 +6,36 @@
 
 <%- include('../partials/header.ejs') %>
 
-<!-- Content for the Register page -->
+<!-- Content for the Setings page -->
     <div class="container">
-        <!-- Message Area-->
-        <% if(messages.length> 0) {%>
-            <div class="alert alert-danger">
-                <%= messages %>
-            </div>
-        <% } %>
-
         <div class="row">
             <div class="offset-md-4 col-md-4">
                 <div class="bg-light rounded-3 text-dark mx-1 my-1 px-5 py-5">
-                    <h1 class="text-center">Register New Account</h1>
+                    <h1 class="text-center">Modify Account</h1>
                     <form method="POST" autocomplete="off">
-                        <fieldset class="form-group mt-3">
-                            <label for="userType">User Type</label>
-                            <select class="form-select" id="userType" name="Priority" required>
-                                <option value="regular">Regular</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </fieldset>
-                        
                         <fieldset class="form-group mt-3">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" name="username" placeholder="Enter username"
-                                id="username" required autofocus>
+                                id="username" autofocus
+                            >
                         </fieldset>
                         
                         <fieldset class="form-group mt-3">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="password" placeholder="Enter password"
-                                id="password" required>
+                                id="password"
+                            >
                         </fieldset>
                         
                         <fieldset class="form-group mt-3">
                             <label for="email">Email address</label>
                             <input type="email" class="form-control" name="email" placeholder="Enter email address"
-                                id="email" required>
+                                id="email"
+                            >
                         </fieldset>
                         
                         <fieldset class="form-group text-right mt-3 text-center">
-                            <input type="submit" class="btn btn-success" value="Register">
+                            <input type="submit" class="btn btn-success" value="Save Changes">
                             <a href="/">
                                 <input type="button" class="btn btn-warning" value="Cancel">
                             </a>

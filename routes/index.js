@@ -23,6 +23,12 @@ router.get('/register', controlerIndex.displayRegisterPage);
 /* POST Route for processing Register page */
 router.post('/register', controlerIndex.processRegisterPage);
 
+/* GET Route for displaying Settings page */
+router.get('/settings', controlerIndex.displaySettingsPage);
+
+/* POST Route for processing Settings page */
+router.post('/settings', controlerIndex.processSettingsPage);
+
 /* GET to perform UserLogout */
 router.get('/logout', controlerIndex.performLogout);
 

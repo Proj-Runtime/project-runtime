@@ -19,7 +19,7 @@ let User = mongoose.Schema(
         },
         email:
         {
-        type: String,
+            type: String,
             default: '',
             trim: true,
             required: 'email is required'

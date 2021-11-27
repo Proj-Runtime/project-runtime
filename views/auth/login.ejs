@@ -17,33 +17,44 @@
 
     <div class="row">
         <div class="offset-md-4 col-md-4">
-            <br />
-            <h1>Please Login</h1>
-            <form method="POST" autocomplete="off">
-                <fieldset class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control"
-                    name = "username" placeholder="Enter username"
-                    id="username" required autofocus>
-                </fieldset>
-                <br />
-                <fieldset class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control"
-                    name = "password" placeholder="Enter password"
-                    id="password" required>
-                    or
-                    <a href="/register">Register Here</a>
-                </fieldset>
-                <br />
-                <fieldset class="form-group text-right">
-                    <input type="submit" class="btn btn-primary" value="Login">
-                    <a href="/">
-                        <input type="button" class="btn btn-warning" value="Cancel">
-                    </a>
-                </fieldset>
+            <div class="bg-light rounded-3 text-dark mx-1 my-1 px-5 py-5">
+                <h1 class="text-center">Login</h1>
+                <form method="POST" autocomplete="off">
 
-            </form>
+                    <fieldset class="form-group">
+                        <label for="userType">User Type</label>
+                        <select class="form-select" id="userType" name="Priority" required>
+                            <option value="regular">Regular</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </fieldset>
+
+                    <fieldset class="form-group mt-3">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control"
+                        name = "username" placeholder="Enter username"
+                        id="username" required autofocus>
+                    </fieldset>
+
+                    <fieldset class="form-group mt-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control"
+                        name = "password" placeholder="Enter password"
+                        id="password" required>
+                    </fieldset>
+
+                    <fieldset class="form-group text-center mt-3">
+                        <input type="submit" class="btn btn-primary" value="Login">
+                        <a href="/register">
+                            <input type="button" class="btn btn-success" value="Register">
+                        </a>
+                        <a href="/">
+                            <input type="button" class="btn btn-warning" value="Cancel">
+                        </a>
+                    </fieldset>
+
+                </form>
+            </div>
         </div>
     </div>
 </div>

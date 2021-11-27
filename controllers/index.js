@@ -118,6 +118,58 @@ module.exports.processRegisterPage = (req, res, next) => {
   });
 }
 
+
+// Gets user account and renders the modify form using the settings.ejs template
+module.exports.displaySettingsPage = (req, res, next) => {
+    let id = req.params.id;
+    let username = req.params.username;
+    let email = req.params.email;
+    let userType = req.params.userType;
+
+    User.findById(id, (err, settingsToEdit) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            //show the settings view
+            res.render('auth/settings', 
+            {
+                title: 'Modify User Account', 
+                user: settingsToEdit, 
+                username: req.user ? req.user.username : ''
+            })
+        }
+    });
+}
+
+// Processes the data submitted from the settings form to update a user account
+module.exports.processSettingsPage = (req, res, next) => {
+    let id = req.params.id
+
+    let updatedSettings = Settings({
+        _id: req.body.id,
+        username: req.body.username,
+        email: req.body.email
+    });
+
+    Settings.updateOne({_id: id}, updatedSettings, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // refresh the Incident list
+            res.redirect('/');
+        }
+    });
+}
+  
+
 // Performs Logout
 module.exports.performLogout = (req, res, next) => {
   req.logout();
