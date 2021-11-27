@@ -5,7 +5,7 @@
 */
 
 // create a reference to the model
-let Incident = require('../models/incident');
+let Incident = require('../../server/models/incident');
 
 // Gets all incidents from the Database and renders the page to list all incidents.
 module.exports.incidentList = function(req, res, next) {  
