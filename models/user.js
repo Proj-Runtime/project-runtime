@@ -27,7 +27,6 @@ let User = mongoose.Schema(
         userType:
         {
             type: String,
-            default: '',
             trim: true,
             required: 'usertype is required'
         }

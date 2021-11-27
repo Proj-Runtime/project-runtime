@@ -14,7 +14,7 @@ let userModel = require('../models/user');
 let User = userModel.User;
 
 exports.home = function(req, res, next) {
-    res.render('index', { title: 'Home', username: req.user ? req.user.username : '' });
+  res.render('index', { title: 'Home', username: req.user ? req.user.username : '' });
 };
 
 // Display the Login page
@@ -22,12 +22,12 @@ module.exports.displayLoginPage = (req, res, next) => {
   //check if user is already logged in
   if(!req.user)
   {
-      res.render('auth/login',
-      {
-        title: "login",
-        messages: req.flash('loginMessage'),
-        username: req.user ? req.user.username : ''
-      })
+    res.render('auth/login',
+    {
+      title: "login",
+      messages: req.flash('loginMessage'),
+      username: req.user ? req.user.username : ''
+    })
   }
   else
   {
@@ -42,21 +42,21 @@ module.exports.processLoginPage = (req, res, next) => {
     // server err
     if(err)
     {
-        return next(err);
+      return next(err);
     }
     // if user login error
     if(!user)
     {
-        req.flash('loginMessage', 'Authentication Error');
-        return res.redirect('/login');
+      req.flash('loginMessage', 'Authentication Error');
+      return res.redirect('/login');
     }
     req.login(user, (err) => {
-        //server error
-        if(err)
-        {
-            return next(err);
-        }
-        return res.redirect('/incident/list')
+      //server error
+      if(err)
+      {
+        return next(err);
+      }
+      return res.redirect('/incident/list')
     });
   })(req, res, next);    
 }
@@ -68,9 +68,9 @@ module.exports.displayRegisterPage = (req, res, next) => {
   {
     res.render('auth/register',
     {
-        title: 'Register',
-        messages: req.flash('registerMessage'),
-        username: req.user ? req.user.username : ''
+      title: 'Register',
+      messages: req.flash('registerMessage'),
+      username: req.user ? req.user.username : ''
     });
   }
   else
@@ -89,84 +89,84 @@ module.exports.processRegisterPage = (req, res, next) => {
   });
 
   User.register(newUser, req.body.password, (err) => {
-      if (err)
+    if (err)
+    {
+      console.log("Error: Inserting New User");
+      if(err.name == "UserExistsError")
       {
-        console.log("Error: Inserting New User");
-        if(err.name == "UserExistsError")
-        {
-            req.flash(
-            'registerMessage',
-            'Registration Error: User Already Exists!'
-            );
-            console.log('Error: User Already Exists')
-        }
-        return res.render('auth/register', 
-        {
-        title: 'Register',
-        messages: req.flash('registerMessage'),
-        username: req.user ? req.user.username : ''
-        });
+        req.flash(
+        'registerMessage',
+        'Registration Error: User Already Exists!'
+        );
+        console.log('Error: User Already Exists')
       }
-      else
+      return res.render('auth/register', 
       {
-        // if no error, registration successful
-        return passport.authenticate('local')(req, res, () => {
-        //redirect to /login
-        res.redirect('/')
-        });
-      }
+      title: 'Register',
+      messages: req.flash('registerMessage'),
+      username: req.user ? req.user.username : ''
+      });
+    }
+    else
+    {
+      // if no error, registration successful
+      return passport.authenticate('local')(req, res, () => {
+      //redirect to /login
+      res.redirect('/')
+      });
+    }
   });
 }
 
 
 // Gets user account and renders the modify form using the settings.ejs template
 module.exports.displaySettingsPage = (req, res, next) => {
-    let id = req.params.id;
-    let username = req.params.username;
-    let email = req.params.email;
-    let userType = req.params.userType;
+  let id = req.params.id;
+  let username = req.params.username;
+  let email = req.params.email;
+  let userType = req.params.userType;
 
-    User.findById(id, (err, settingsToEdit) => {
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            //show the settings view
-            res.render('auth/settings', 
-            {
-                title: 'Modify User Account', 
-                user: settingsToEdit, 
-                username: req.user ? req.user.username : ''
-            })
-        }
-    });
+  User.findById(id, (err, settingsToEdit) => {
+    if(err)
+    {
+      console.log(err);
+      res.end(err);
+    }
+    else
+    {
+      //show the settings view
+      res.render('auth/settings', 
+      {
+        title: 'Modify User Account', 
+        user: settingsToEdit, 
+        username: req.user ? req.user.username : ''
+      })
+    }
+  });
 }
 
 // Processes the data submitted from the settings form to update a user account
 module.exports.processSettingsPage = (req, res, next) => {
-    let id = req.params.id
+  let id = req.params.id
 
-    let updatedSettings = Settings({
-        _id: req.body.id,
-        username: req.body.username,
-        email: req.body.email
-    });
+  let updatedSettings = Settings({
+    _id: req.body.id,
+    username: req.body.username,
+    email: req.body.email
+  });
 
-    Settings.updateOne({_id: id}, updatedSettings, (err) => {
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            // refresh the Incident list
-            res.redirect('/');
-        }
-    });
+  Settings.updateOne({_id: id}, updatedSettings, (err) => {
+    if(err)
+    {
+      console.log(err);
+      res.end(err);
+    }
+    else
+    {
+      // refresh the Incident list
+      res.redirect('/');
+    }
+  });
 }
   
 

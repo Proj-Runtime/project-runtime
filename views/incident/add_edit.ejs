@@ -14,9 +14,11 @@
 
             <form class="form" method="POST">
                 <div class="form-group">
-                    <label for="RecordNumbertextField" class="labelList">Record Number</label>
-                    <input type="text" class="form-control" id="RecordNumbertextField" name="RecordNumber"
-                    value="<%= incident.RecordNumber %>" readonly>
+                    <% if (title == "Edit Incident Report") { %>
+                        <label for="RecordNumbertextField" class="labelList">Record Number</label>
+                        <input type="text" class="form-control" id="RecordNumbertextField" name="RecordNumber"
+                        value="<%= incident.RecordNumber %>" readonly>
+                    <% } %>
                 </div>
 
                 <div class="form-group mt-3">
@@ -25,12 +27,20 @@
                         value="<%= incident._id %>"
                     >
                     <label for="requestTextField">Requester Name</label>
-                    <input type="text" class="form-control"
+                    <% if (title == "Edit Incident Report") { %>
+                        <input type="text" class="form-control"
+                        id="requestTextField"
+                        name="RequesterName" 
+                        value="<%= incident.RequesterName %>"
+                        readonly>
+                    <% } else { %>
+                        <input type="text" class="form-control"
                         id="requestTextField"
                         placeholder="First and last name."
                         name="RequesterName" 
                         value="<%= incident.RequesterName %>"
                         required>
+                    <% } %>            
                 </div>
                 
                 <div class="form-group mt-3">
@@ -64,25 +74,38 @@
                 </div>
                 
                 <div class="form-group mt-3">
-                    <label for="techTextField">Technician</label>
-                    <select class="form-select" id="techTextField" name="Technician" required>
-                        <option value="Unassigned" selected>--Open to select technician--</option>
-                        <option value="Lana Reyes">Lana Reyes</option>
-                        <option value="James Archer">James Archer</option>
-                        <option value="Aparna Ragavan">Aparna Ragavan</option>
-                        <option value="Robert Lee">Robert Lee</option>
-                        <option value="Stephen Nelson">Stephen Nelson</option>
-                    </select>
+                    <% if (title == "Edit Incident Report") { %>
+                        <label for="techTextField">Technician</label>
+                        <select class="form-select" id="techTextField" name="Technician" required>
+                            <option value="Unassigned" selected>--Select a technician--</option>
+                            <option value="Lana Reyes">Lana Reyes</option>
+                            <option value="James Archer">James Archer</option>
+                            <option value="Aparna Ragavan">Aparna Ragavan</option>
+                            <option value="Robert Lee">Robert Lee</option>
+                            <option value="Stephen Nelson">Stephen Nelson</option>
+                        </select>
+                    <% } %>      
                 </div>
-                
+
                 <div class="form-group mt-3">
-                    <label for="statTextField">Status</label>
-                    <select class="form-select" id="statTextField" name="Status">
-                        <option value="New" selected>--Select a priority--</option>
-                        <option value="New" selected>New (default)</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Closed">Closed</option>
-                    </select>
+                    <% if (title == "Edit Incident Report") { %>
+                        <label for="statTextField">Status</label>
+                        <select class="form-select" id="statTextField" name="Status">
+                            <option value="New" selected>--Select a priority--</option>
+                            <option value="Assigned" selected>Assigned</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="On Hold">On Hold</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    <% } else { %>
+                        <label for="statTextField">Status</label>
+                        <input type="text" class="form-control"
+                        id="statTextField"
+                        name="Status" 
+                        value="New"
+                        readonly>
+                    <% } %>     
                 </div>
                 
                 <div class="form-group mt-3">
