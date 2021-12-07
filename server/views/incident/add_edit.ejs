@@ -17,7 +17,7 @@
                     <% if (title == "Edit Incident Report") { %>
                         <label for="RecordNumbertextField" class="labelList">Record Number</label>
                         <input type="text" class="form-control" id="RecordNumbertextField" name="RecordNumber"
-                        value="<%= incident.RecordNumber %>" readonly>
+                        value="<%= incident.RecordNumber %>" disabled readonly>
                     <% } %>
                 </div>
 
@@ -32,7 +32,7 @@
                         id="requestTextField"
                         name="RequesterName" 
                         value="<%= incident.RequesterName %>"
-                        readonly>
+                        disabled readonly>
                     <% } else { %>
                         <input type="text" class="form-control"
                         id="requestTextField"
@@ -42,57 +42,13 @@
                         required>
                     <% } %>            
                 </div>
-                
-                <div class="form-group mt-3">
-                    <label for="descTextField">Description</label>
-                    <input type="text" class="form-control"
-                        id="descTextField"
-                        placeholder="Enter the incident description."
-                        name="Description" 
-                        value="<%= incident.Description %>"
-                        required>
-                </div>
-                
-                <div class="form-group mt-3">
-                    <label for="narTextField">Narrative</label>
-                    <input type="text" class="form-control"
-                        id="narTextField"
-                        placeholder="Enter the incident narrative."
-                        name="Narrative" 
-                        value="<%= incident.Narrative %>"
-                        required>
-                </div>
-                
-                <div class="form-group mt-3">
-                    <label for="priorityTextField">Priority</label>
-                    <select class="form-select" id="priorityTextField" name="Priority" required>
-                        <option value="Low" selected>--Open to select priority--</option>
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
-                    </select>
-                </div>
-                
-                <div class="form-group mt-3">
-                    <% if (title == "Edit Incident Report") { %>
-                        <label for="techTextField">Technician</label>
-                        <select class="form-select" id="techTextField" name="Technician" required>
-                            <option value="Unassigned" selected>--Select a technician--</option>
-                            <option value="Lana Reyes">Lana Reyes</option>
-                            <option value="James Archer">James Archer</option>
-                            <option value="Aparna Ragavan">Aparna Ragavan</option>
-                            <option value="Robert Lee">Robert Lee</option>
-                            <option value="Stephen Nelson">Stephen Nelson</option>
-                        </select>
-                    <% } %>      
-                </div>
 
                 <div class="form-group mt-3">
                     <% if (title == "Edit Incident Report") { %>
                         <label for="statTextField">Status</label>
                         <select class="form-select" id="statTextField" name="Status">
-                            <option value="New" selected>--Select a priority--</option>
-                            <option value="Assigned" selected>Assigned</option>
+                            <option value="New" selected>--Open to change status--</option>
+                            <option value="Assigned">Assigned</option>
                             <option value="In Progress">In Progress</option>
                             <option value="On Hold">On Hold</option>
                             <option value="Resolved">Resolved</option>
@@ -109,13 +65,65 @@
                 </div>
                 
                 <div class="form-group mt-3">
+                    <label for="descTextField">Description</label>
+                    <input type="text" class="form-control"
+                        id="descTextField"
+                        placeholder="Enter the incident description."
+                        name="Description" 
+                        value="<%= incident.Description %>"
+                        required>
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label for="narTextField">Narrative</label>
+                        <div class="input-group">
+                            <input type="text-area" class="form-control"
+                                id="narTextField"
+                                placeholder="Enter the incident narrative."
+                                name="Narrative" 
+                                value="<%= incident.Narrative %>"
+                                required
+                            >
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <a href="/incident/audit"><i class="fas fa-external-link-alt"></i> Audit Trail </a>
+                                </span>
+                            </div>
+                        </div>
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label for="priorityTextField">Priority</label>
+                    <select class="form-select" id="priorityTextField" name="Priority" required>
+                        <option value="Low" selected>--Open to select priority--</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                
+                <div class="form-group mt-3">
+                    <% if (title == "Edit Incident Report") { %>
+                        <label for="techTextField">Technician</label>
+                        <select class="form-select" id="techTextField" name="Technician" required>
+                            <option value="Unassigned" selected>--Open to select a technician--</option>
+                            <option value="Lana Reyes">Lana Reyes</option>
+                            <option value="James Archer">James Archer</option>
+                            <option value="Aparna Ragavan">Aparna Ragavan</option>
+                            <option value="Robert Lee">Robert Lee</option>
+                            <option value="Stephen Nelson">Stephen Nelson</option>
+                        </select>
+                    <% } %>      
+                </div>
+                
+                <div class="form-group mt-3">
                     <label for="dateTextField">Date</label>
                     <input type="text" class="form-control"
                         id="dateTextField"
                         placeholder="Enter the CreatedDate"
                         name="CreatedDate" 
                         value="<%= incident.CreatedDate %>"
-                        readonly>
+                        disabled readonly>
                 </div>
                 
                 <div class="mt-3 mb-5 pb-5 text-center">

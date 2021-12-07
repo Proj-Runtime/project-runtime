@@ -17,7 +17,7 @@ function requireAuth(req, res, next)
   //check if the user is logged in
   if(!req.isAuthenticated())
   {
-      return res.redirect('/login');
+    return res.redirect('/login');
   }
   next();
 };
@@ -31,6 +31,9 @@ router.get('/details/:id', requireAuth, incidentController.details);
 // Routers for edit functions
 router.get('/edit/:id', requireAuth, incidentController.displayEditPage);
 router.post('/edit/:id', requireAuth, incidentController.processEditPage);
+
+// Routers for audit functions
+router.get('/audit/:id', requireAuth, incidentController.displayAudit);
 
 // Router for Delete function
 router.get('/delete/:id', requireAuth, incidentController.performDelete);

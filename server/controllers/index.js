@@ -122,9 +122,6 @@ module.exports.processRegisterPage = (req, res, next) => {
 // Gets user account and renders the modify form using the settings.ejs template
 module.exports.displaySettingsPage = (req, res, next) => {
   let id = req.params.id;
-  let username = req.params.username;
-  let email = req.params.email;
-  let userType = req.params.userType;
 
   User.findById(id, (err, settingsToEdit) => {
     if(err)
@@ -134,10 +131,10 @@ module.exports.displaySettingsPage = (req, res, next) => {
     }
     else
     {
-      //show the settings view
+      //show the edit view
       res.render('auth/settings', 
       {
-        title: 'Modify User Account', 
+        title: 'Account Modification', 
         user: settingsToEdit, 
         username: req.user ? req.user.username : ''
       })
@@ -163,7 +160,6 @@ module.exports.processSettingsPage = (req, res, next) => {
     }
     else
     {
-      // refresh the Incident list
       res.redirect('/');
     }
   });

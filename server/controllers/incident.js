@@ -40,7 +40,7 @@ module.exports.details = (req, res, next) => {
         {
             //show the edit view
             res.render('incident/details', {
-                title: 'Incident Details', 
+                title: 'Incident Dashboard', 
                 incident: incidentToShow,
                 username: req.user ? req.user.username : ''
             })
@@ -79,6 +79,7 @@ module.exports.processAddPage = (req, res, next) => {
     let month = (currentDate.getMonth() + 1).toString();
     let year = currentDate.getFullYear().toString().substr(-2);
     let newTicketNumber;
+    let timestampNarr = currentDate;
 
     Incident.findOne({}, {}, { sort: { 'RecordNumber' : -1 } }, function(err, result) {
         if(err){
@@ -166,6 +167,26 @@ module.exports.processEditPage = (req, res, next) => {
         {
             // refresh the Incident list
             res.redirect('/incident/list');
+        }
+    });
+}
+
+// Gets an incident narrative and renders the page
+module.exports.displayAudit = function(req, res, next) {  
+    let id = req.params.id
+
+    Incident.find((err, auditList) => {
+        if(err)
+        {
+            return console.error(err);
+        }
+        else
+        {
+            res.render('incident/audit', {
+                title: 'Audit Trail', 
+                audit: auditList,
+                username: req.user ? req.user.username : ''
+            })            
         }
     });
 }

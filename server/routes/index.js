@@ -6,6 +6,8 @@
 
 var express = require('express');
 var router = express.Router();
+let mongoose = require('mongoose');
+let passport = require('passport');
 let controlerIndex = require('../controllers/index');
 
 /* GET home page. */
@@ -24,10 +26,13 @@ router.get('/register', controlerIndex.displayRegisterPage);
 router.post('/register', controlerIndex.processRegisterPage);
 
 /* GET Route for displaying Settings page */
-router.get('/settings', controlerIndex.displaySettingsPage);
+router.get('/settings/', controlerIndex.displaySettingsPage);
 
 /* POST Route for processing Settings page */
-router.post('/settings', controlerIndex.processSettingsPage);
+router.post('/settings/:id', controlerIndex.processSettingsPage);
+
+// // Router for Delete function
+// router.get('/delete/:id', controlerIndex.performDeleteAccount);
 
 /* GET to perform UserLogout */
 router.get('/logout', controlerIndex.performLogout);

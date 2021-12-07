@@ -20,10 +20,10 @@
                 <% } %>     
 
                 <% if(typeof username == 'string' && username){ %>
-                <a href="/incident/add" class="btn btn-warning align-self-end" role="button">
-                    <i class="fas fa-times-circle"></i>
-                    Past Incident
-                </a>
+                    <button class="btn btn-warning align-self-end" onclick="ShowAndHide()">
+                        <i class="fas fa-times-circle"></i>
+                        Past Incident 
+                    </button>
                 <% } %>    
             </div>
 
@@ -43,35 +43,63 @@
                             <th class="text-center" colspan="2"></th>
                         </tr>
                     </thead>
-
+                   
                     <tbody class="fontSizeBody">
                         <!-- Repeatable Template Row -->
                         <% for(let count = 0; count < incidents.length; count++) { %>
-                            <tr>
-                                <td class="text-center"><%= incidents[count].RecordNumber %></td>
-                                <td class="text-center"><%= incidents[count].Description %></td>
-                                <td class="text-center"><%= incidents[count].Narrative %></td>
-                                <td class="text-center"><%= incidents[count].RequesterName %></td>
-                                <td class="text-center"><%= incidents[count].Priority %></td>
-                                <td class="text-center"><%= incidents[count].Technician %></td>
-                                <td class="text-center"><%= incidents[count].Status %></td>
-                                <td class="text-center"><%= incidents[count].CreatedDate.toLocaleDateString(undefined, 
-                                    { year: 'numeric', month: 'long', day: 'numeric'}
-                                ) %></td>
-                                
-                                <td class="text-center">
-                                    <% if(typeof username == 'string' && username){ %>
-                                    <a href="/incident/edit/<%= incidents[count]._id %>" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-pencil-alt"></i></a>
-                                    <% } %>
-                                </td>
-                                <td class="text-center">
-                                    <% if(typeof username == 'string' && username){ %>
-                                    <a href="/incident/delete/<%= incidents[count]._id %>" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i></a>
-                                    <% } %>
-                                </td>
-                            </tr>
+                            <% if(incidents[count].Status === 'Closed'){ %>
+                                <tr>
+                                    <td class="text-center hide" style="display:none"><%= incidents[count].RecordNumber %></td>
+                                    <td class="text-center hide" style="display:none"><%= incidents[count].Description %></td>
+                                    <td class="text-center hide" style="display:none"><%= incidents[count].Narrative %></td>
+                                    <td class="text-center hide" style="display:none"><%= incidents[count].RequesterName %></td>
+                                    <td class="text-center hide" style="display:none"><%= incidents[count].Priority %></td>
+                                    <td class="text-center hide" style="display:none"><%= incidents[count].Technician %></td>
+                                    <td class="text-center hide" style="display:none"><%= incidents[count].Status %></td>
+                                    <td class="text-center hide" style="display:none"><%= incidents[count].CreatedDate.toLocaleDateString(undefined, 
+                                        { year: 'numeric', month: 'long', day: 'numeric'}
+                                    ) %></td>
+                                    
+                                    <td class="text-center hide" style="display:none">
+                                        <% if(typeof username == 'string' && username){ %>
+                                        <a href="/incident/edit/<%= incidents[count]._id %>" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-pencil-alt"></i></a>
+                                        <% } %>
+                                    </td>
+                                    <td class="text-center hide" style="display:none">
+                                        <% if(typeof username == 'string' && username){ %>
+                                        <a href="/incident/delete/<%= incidents[count]._id %>" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i></a>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% } else { %>
+                                <tr>
+                                    <td class="text-center"><%= incidents[count].RecordNumber %></td>
+                                    <td class="text-center"><%= incidents[count].Description %></td>
+                                    <td class="text-center"><%= incidents[count].Narrative %></td>
+                                    <td class="text-center"><%= incidents[count].RequesterName %></td>
+                                    <td class="text-center"><%= incidents[count].Priority %></td>
+                                    <td class="text-center"><%= incidents[count].Technician %></td>
+                                    <td class="text-center"><%= incidents[count].Status %></td>
+                                    <td class="text-center"><%= incidents[count].CreatedDate.toLocaleDateString(undefined, 
+                                        { year: 'numeric', month: 'long', day: 'numeric'}
+                                    ) %></td>
+                                    
+                                    <td class="text-center">
+                                        <% if(typeof username == 'string' && username){ %>
+                                        <a href="/incident/edit/<%= incidents[count]._id %>" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-pencil-alt"></i></a>
+                                        <% } %>
+                                    </td>
+                                    <td class="text-center">
+                                        <% if(typeof username == 'string' && username){ %>
+                                        <a href="/incident/delete/<%= incidents[count]._id %>" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i></a>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% } %>
                         <% } %>
                     </tbody>
                 </table>

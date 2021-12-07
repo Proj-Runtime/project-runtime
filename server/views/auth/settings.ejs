@@ -7,43 +7,46 @@
 <%- include('../partials/header.ejs') %>
 
 <!-- Content for the Setings page -->
-    <div class="container">
-        <div class="row">
-            <div class="offset-md-4 col-md-4">
-                <div class="bg-light rounded-3 text-dark mx-1 my-1 px-5 py-5">
-                    <h1 class="text-center">Modify Account</h1>
-                    <form method="POST" autocomplete="off">
-                        <fieldset class="form-group mt-3">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" name="username" placeholder="Enter username"
-                                id="username" autofocus
-                            >
-                        </fieldset>
-                        
-                        <fieldset class="form-group mt-3">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="Enter password"
-                                id="password"
-                            >
-                        </fieldset>
-                        
-                        <fieldset class="form-group mt-3">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" name="email" placeholder="Enter email address"
-                                id="email"
-                            >
-                        </fieldset>
-                        
-                        <fieldset class="form-group text-right mt-3 text-center">
-                            <input type="submit" class="btn btn-success" value="Save Changes">
-                            <a href="/">
-                                <input type="button" class="btn btn-warning" value="Cancel">
-                            </a>
-                        </fieldset>
-                    </form>
-                </div>
+    <div class="row">
+        <div class="offset-md-4 col-md-4">
+            <div class="bg-light rounded-3 text-dark mx-1 my-1 px-5 py-5">
+                <h1 class="text-center">Account Modification</h1>
+                <form method="POST" autocomplete="off">
+
+                    <fieldset class="form-group mt-3">
+                        <input type="hidden"
+                        name="id"
+                        value="<%= user._id %>"
+                        >
+                        <label for="userType">User Type</label>
+                        <input type="text" class="form-control" name="userType" 
+                            id="userType" value="<% user.userType %> readonly"
+                        >
+                    </fieldset>
+
+                    <fieldset class="form-group mt-3">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" 
+                            id="username" value="<% user.username %>"
+                        >
+                    </fieldset>
+                    
+                    <fieldset class="form-group mt-3">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" name="email" 
+                            id="email" value="<% user.email %>">
+                    </fieldset>
+                    
+                    <fieldset class="form-group text-right mt-3 text-center">
+                        <input type="submit" class="btn btn-success" value="Register">
+                        <a href="/">
+                            <input type="button" class="btn btn-warning" value="Cancel">
+                        </a>
+                    </fieldset>
+                    
+                </form>
             </div>
         </div>
     </div>
 
-    <%- include('../partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>
