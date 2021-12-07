@@ -7,7 +7,21 @@
 <%- include ../partials/header.ejs %>
 
 <!-- Content for the Add_Edit page -->
+<div class="container mb-4">
+  <div class="row">
+    <div class="offset-md-3 col-md-6">
+      <h1 class="text-center pb-3"><%= title %></h1>
 
-
+      <h3>Record Number: <% incident.RecordNumber %> </h3>
+      <h3>Date Created: <% incident.CreatedDate %> </h3>
+      <h3>Requester Name: <% incident.RequesterName %> </h3>
+      <h3>Technician Name: <% incident.Technician %> </h3>
+      <h3>Priority: <% incident.Priority %> </h3>
+      <h3>Status: <% incident.Status %> </h3>
+      <h3>Description: <% incident.Description %> </h3>
+      <h3>Narrative: <% incident.Narrative %> </h3>
+    </div>
+  </div>
+</div>
 
 <%- include ../partials/footer.ejs %>

@@ -175,18 +175,21 @@ module.exports.processEditPage = (req, res, next) => {
 module.exports.displayAudit = function(req, res, next) {  
     let id = req.params.id
 
-    Incident.find((err, auditList) => {
+    Incident.findById(id, (err, auditToDisplay) => {
         if(err)
         {
-            return console.error(err);
+            console.log(err);
+            res.end(err);
         }
         else
         {
-            res.render('incident/audit', {
+            //show the audit view
+            res.render('incident/audit', 
+            {
                 title: 'Audit Trail', 
-                audit: auditList,
+                incident: auditToDisplay, 
                 username: req.user ? req.user.username : ''
-            })            
+            })
         }
     });
 }
@@ -203,8 +206,8 @@ module.exports.performDelete = (req, res, next) => {
         }
         else
         {
-             // refresh the Incident list
-             res.redirect('/incident/list');
+            // refresh the Incident list
+            res.redirect('/incident/list');
         }
     });
 }
