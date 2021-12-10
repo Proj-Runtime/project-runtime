@@ -26,7 +26,7 @@ router.get('/register', controlerIndex.displayRegisterPage);
 router.post('/register', controlerIndex.processRegisterPage);
 
 /* GET Route for displaying Settings page */
-router.get('/settings/', controlerIndex.displaySettingsPage);
+router.get('/settings', controlerIndex.displaySettingsPage);
 
 /* POST Route for processing Settings page */
 router.post('/settings/:id', controlerIndex.processSettingsPage);

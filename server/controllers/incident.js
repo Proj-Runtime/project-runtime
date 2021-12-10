@@ -30,7 +30,7 @@ module.exports.details = (req, res, next) => {
     
     let id = req.params.id;
 
-    incident.findById(id, (err, incidentToShow) => {
+    Incident.findById(id, (err, incidentToShow) => {
         if(err)
         {
             console.log(err);
@@ -59,19 +59,20 @@ module.exports.displayAddPage = (req, res, next) => {
     })          
 }
 
-
 // Processes the data submitted from the Add form to create a new incident
 module.exports.processAddPage = (req, res, next) => {
+
     let newIncident = Incident({
         _id: req.body.id,
         RecordNumber: req.body.RecordNumber,
         Description: req.body.Description,
+        Narrative: [ req.body.Narrative ],
         Priority: req.body.Priority,
-        Narrative: req.body.Narrative,
         RequesterName: req.body.RequesterName,
         Technician: req.body.Technician,
         Status: req.body.Status,
         CreatedDate: req.body.CreatedDate,
+        TimeStamped: [ req.body.CreatedDate ]
     });
 
     let currentDate = new Date();
@@ -79,7 +80,6 @@ module.exports.processAddPage = (req, res, next) => {
     let month = (currentDate.getMonth() + 1).toString();
     let year = currentDate.getFullYear().toString().substr(-2);
     let newTicketNumber;
-    let timestampNarr = currentDate;
 
     Incident.findOne({}, {}, { sort: { 'RecordNumber' : -1 } }, function(err, result) {
         if(err){
@@ -144,17 +144,20 @@ module.exports.displayEditPage = (req, res, next) => {
 // Processes the data submitted from the Edit form to update a incident
 module.exports.processEditPage = (req, res, next) => {
     let id = req.params.id
+    // update timestamped for every incident modification
+    let timestampNarr = new Date();
 
     let updatedIncident = Incident({
         _id: req.body.id,
         RecordNumber: req.body.RecordNumber,
         Description: req.body.Description,
+        Narrative: [ req.body.Narrative ],
         Priority: req.body.Priority,
-        Narrative: req.body.Narrative,
         RequesterName: req.body.RequesterName,
         Technician: req.body.Technician,
         Status: req.body.Status,
         CreatedDate: req.body.CreatedDate,
+        TimeStamped: [ timestampNarr ]
     });
 
     Incident.updateOne({_id: id}, updatedIncident, (err) => {
@@ -175,7 +178,7 @@ module.exports.processEditPage = (req, res, next) => {
 module.exports.displayAudit = function(req, res, next) {  
     let id = req.params.id
 
-    Incident.findById(id, (err, auditToDisplay) => {
+    Incident.findById(id, (err, displayAudit) => {
         if(err)
         {
             console.log(err);
@@ -187,9 +190,10 @@ module.exports.displayAudit = function(req, res, next) {
             res.render('incident/audit', 
             {
                 title: 'Audit Trail', 
-                incident: auditToDisplay, 
+                incident: displayAudit, 
                 username: req.user ? req.user.username : ''
             })
+            console.log(displayAudit);
         }
     });
 }

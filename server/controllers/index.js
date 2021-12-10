@@ -14,7 +14,10 @@ let userModel = require('../models/user');
 let User = userModel.User;
 
 exports.home = function(req, res, next) {
-  res.render('index', { title: 'Home', username: req.user ? req.user.username : '' });
+  res.render('index', { 
+    title: 'Home', 
+    username: req.user ? req.user.username : ''
+  });
 };
 
 // Display the Login page
@@ -102,9 +105,10 @@ module.exports.processRegisterPage = (req, res, next) => {
       }
       return res.render('auth/register', 
       {
-      title: 'Register',
-      messages: req.flash('registerMessage'),
-      username: req.user ? req.user.username : ''
+        title: 'Register',
+        messages: req.flash('registerMessage'),
+        
+        username: req.user ? req.user.username : ''
       });
     }
     else
@@ -122,6 +126,7 @@ module.exports.processRegisterPage = (req, res, next) => {
 // Gets user account and renders the modify form using the settings.ejs template
 module.exports.displaySettingsPage = (req, res, next) => {
   let id = req.params.id;
+  console.log('ID: ' + id);
 
   User.findById(id, (err, settingsToEdit) => {
     if(err)
@@ -138,6 +143,7 @@ module.exports.displaySettingsPage = (req, res, next) => {
         user: settingsToEdit, 
         username: req.user ? req.user.username : ''
       })
+      console.log(settingsToEdit);
     }
   });
 }
@@ -164,7 +170,6 @@ module.exports.processSettingsPage = (req, res, next) => {
     }
   });
 }
-  
 
 // Performs Logout
 module.exports.performLogout = (req, res, next) => {

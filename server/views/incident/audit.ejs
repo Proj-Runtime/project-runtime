@@ -7,21 +7,27 @@
 <%- include ../partials/header.ejs %>
 
 <!-- Content for the Add_Edit page -->
-<div class="container mb-4">
-  <div class="row">
-    <div class="offset-md-3 col-md-6">
-      <h1 class="text-center pb-3"><%= title %></h1>
+<div class="mx-5 my-4 bg-white rounded-3">
+  <main class="text-dark">
+    <div class="mx-3">
 
-      <h3>Record Number: <% incident.RecordNumber %> </h3>
-      <h3>Date Created: <% incident.CreatedDate %> </h3>
-      <h3>Requester Name: <% incident.RequesterName %> </h3>
-      <h3>Technician Name: <% incident.Technician %> </h3>
-      <h3>Priority: <% incident.Priority %> </h3>
-      <h3>Status: <% incident.Status %> </h3>
-      <h3>Description: <% incident.Description %> </h3>
-      <h3>Narrative: <% incident.Narrative %> </h3>
+      <h1 class="text-center pt-3 pb-0 mb-0"><%= title %></h1>
+
+      <div class="pb-4">
+        <p class="fs-4">Record Number: <span class="fs-5 fw-bold"><%= incident.RecordNumber %></span></p>
+        <p class="fs-4">Status: <span class="fs-5 fw-bold"><%= incident.Status %></span></p>
+        <p class="fs-4">Date Created: <span class="fs-5 fw-bold"><%= incident.CreatedDate.toLocaleDateString(undefined, 
+          { year: 'numeric', month: 'long', day: 'numeric'}) %></span></p>
+        <p class="fs-4">Requester Name: <span class="fs-5 fw-bold"><%= incident.RequesterName %></span></p>
+        <p class="fs-4">Technician Name: <span class="fs-5 fw-bold"><%= incident.Technician %></span></p>
+        <p class="fs-4">Priority: <span class="fs-5 fw-bold"><%= incident.Priority %></span></p>
+        <p class="fs-4">Description: <span class="fs-5 fw-bold"><%= incident.Description %></span></p>
+        <p class="fs-4">Narrative: <span class="fs-5 fw-bold"><%= incident.Narrative %></span></p>
+        <p class="fs-4">Timestamped: <span class="fs-5 fw-bold"><%= incident.TimeStamped %></span></p>
+      </div>
+
     </div>
-  </div>
+  </main>
 </div>
 
 <%- include ../partials/footer.ejs %>

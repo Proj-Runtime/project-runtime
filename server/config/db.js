@@ -5,5 +5,5 @@
 */
 
 module.exports = {
-  "AtlasDB":"mongodb+srv://saad:cCJebJapdtDq9gwy@cluster0.kledt.mongodb.net/Project?retryWrites=true&w=majority"
+  "AtlasDB":"mongodb+srv://admin:mx9nxX3to2M1lFDO@runtime.efacg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
