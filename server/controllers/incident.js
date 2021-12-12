@@ -4,6 +4,11 @@
   Description: An Incident Management Application
 */
 
+let express = require('express');
+let router = express.Router();
+let mongoose = require('mongoose');
+let jwt = require('jsonwebtoken');
+
 // create a reference to the model
 let Incident = require('../../server/models/incident');
 

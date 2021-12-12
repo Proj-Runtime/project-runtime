@@ -8,6 +8,7 @@ var express = require('express');
 var router = express.Router();
 let mongoose = require('mongoose');
 let passport = require('passport');
+let jwt = require('jsonwebtoken');
 
 let incidentController = require('../controllers/incident');
 

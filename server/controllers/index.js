@@ -8,6 +8,8 @@ let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 let passport = require('passport');
+let jwt = require('jsonwebtoken');
+let DB = require('../config/db');
 
 // define User Model instance
 let userModel = require('../models/user');
@@ -59,6 +61,26 @@ module.exports.processLoginPage = (req, res, next) => {
       {
         return next(err);
       }
+
+      const payload = 
+      {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+
+      const authToken = jwt.sign(payload, DB.Secret, {
+        expiresIn: 604800
+      });
+
+      /* TODO
+      res.json({success: true, msg: "User Logged In Successfully!", user: {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }, token: authToken});
+      */
+
       return res.redirect('/incident/list')
     });
   })(req, res, next);    
@@ -113,6 +135,8 @@ module.exports.processRegisterPage = (req, res, next) => {
     }
     else
     {
+      // TODO res.json({success: true, msg: 'User Registered Successfully!'});
+
       // if no error, registration successful
       return passport.authenticate('local')(req, res, () => {
       //redirect to /login
