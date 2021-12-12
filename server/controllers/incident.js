@@ -157,7 +157,8 @@ module.exports.processEditPage = (req, res, next) => {
         Technician: req.body.Technician,
         Status: req.body.Status,
         CreatedDate: req.body.CreatedDate,
-        TimeStamped: [ timestampNarr ]
+        TimeStamped: [ timestampNarr ],
+        Resolution: req.body.Resolution
     });
 
     Incident.updateOne({_id: id}, updatedIncident, (err) => {

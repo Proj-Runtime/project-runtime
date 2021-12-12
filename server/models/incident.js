@@ -32,7 +32,12 @@ let incidentModel = mongoose.Schema(
             type: Date,
             default: Date.now
         },
-        TimeStamped: [Date]
+        TimeStamped: [Date],
+        Resolution: {
+            type: String,
+            default: "",         // e.g. New, In Progress, Closed
+            trim: true
+        }
     },
     {
         collection: "incidents"

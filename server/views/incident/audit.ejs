@@ -24,6 +24,17 @@
         <p class="fs-4">Description: <span class="fs-5 fw-bold"><%= incident.Description %></span></p>
         <p class="fs-4">Narrative: <span class="fs-5 fw-bold"><%= incident.Narrative %></span></p>
         <p class="fs-4">Timestamped: <span class="fs-5 fw-bold"><%= incident.TimeStamped %></span></p>
+
+        <% if (incident.Status == "Closed") { %>
+          <p class="fs-4">Resolution Field: <span class="fs-5 fw-bold"><%= incident.Resolution %></span></p>
+        <% } %> 
+
+        <div class="pt-5 text-center">
+          <a href="/incident/list" class="btn btn-warning">
+            <i class="fas fa-arrow-alt-circle-left"></i>  
+            Back to Incident List
+          </a>
+        </div>
       </div>
 
     </div>

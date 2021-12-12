@@ -110,6 +110,11 @@
                         disabled readonly>
                     <% } %>     
                 </div>
+
+                <div class="form-group mt-3" id="showResolutionField" style="display:none;">
+                    <label for="rsltnTextField" class="col-lg-2 control-label">Resolution</label>
+                    <textarea class="form-control" id="rsltnTextField" rows="3" name="Resolution" value="<%= incident.Resolution %>" placeholder="Incident resolution field must be entered before this ticket can be officially closed."></textarea>  
+                </div>
                 
                 <div class="form-group mt-3">
                     <label for="descTextField">Description</label>

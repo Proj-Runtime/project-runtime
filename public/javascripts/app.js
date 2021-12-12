@@ -14,3 +14,16 @@ function ShowAndHide() {
         }
     }
 }
+
+window.onload = function(){
+    var dropdown = document.getElementById("statTextField");
+    var showResolutionField = document.getElementById("showResolutionField");
+    dropdown.addEventListener("change", function() {
+        if(dropdown.value == 'Closed'){
+            showResolutionField.style.display = "block";
+            document.getElementById("rsltnTextField").setAttribute("required", "");
+        }else{
+            showResolutionField.style.display = "none";
+        }
+    });
+}
