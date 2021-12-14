@@ -12,7 +12,7 @@
             <div class="bg-light rounded-3 text-dark mx-1 my-1 px-5 py-5">
                 <h1 class="text-center pt-3 pb-0 mb-0"><%= title %></h1>
                 <form method="POST" autocomplete="off">
-
+                    
                     <fieldset class="form-group mt-3">
                         <input type="hidden"
                         name="id"
@@ -20,30 +20,23 @@
                         >
                         <label for="userType">User Type</label>
                         <input type="text" class="form-control" name="userType" 
-                            id="userType" value="<% user.userType %> readonly"
+                            id="userType" value="<%= user.userType %>"
                         >
                     </fieldset>
 
                     <fieldset class="form-group mt-3">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" name="username" 
-                            id="username" value="<% user.username %>"
+                            id="username" value="<%= user.username %>"
                         >
                     </fieldset>
-                    
+                   
                     <fieldset class="form-group mt-3">
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" name="email" 
-                            id="email" value="<% user.email %>">
-                    </fieldset>
-                    
-                    <fieldset class="form-group text-right mt-3 text-center">
-                        <input type="submit" class="btn btn-success" value="Register">
-                        <a href="/">
-                            <input type="button" class="btn btn-warning" value="Cancel">
-                        </a>
-                    </fieldset>
-                    
+                            id="email" value="<%= user.email %>"> 
+                    </fieldset>                
+                   
                 </form>
             </div>
         </div>
