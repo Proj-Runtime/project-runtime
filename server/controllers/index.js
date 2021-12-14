@@ -151,7 +151,7 @@ module.exports.processRegisterPage = (req, res, next) => {
 module.exports.displaySettingsPage = (req, res, next) => {
   let id = req.params.id;
   console.log('ID: ' + id);
-
+  
   User.findOne({username: req.user.username}, (err, settingsToEdit) => {
     if(err)
     {
@@ -168,6 +168,7 @@ module.exports.displaySettingsPage = (req, res, next) => {
         user: settingsToEdit,
         username: req.user ? req.user.username : ''
       })
+      
       console.log(settingsToEdit);
     }
   });
