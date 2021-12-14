@@ -152,7 +152,7 @@ module.exports.displaySettingsPage = (req, res, next) => {
   let id = req.params.id;
   console.log('ID: ' + id);
 
-  User.findById(id, (err, settingsToEdit) => {
+  User.findOne({username: req.user.username}, (err, settingsToEdit) => {
     if(err)
     {
       console.log(err);
@@ -160,11 +160,12 @@ module.exports.displaySettingsPage = (req, res, next) => {
     }
     else
     {
+      console.log(settingsToEdit);
       //show the edit view
-      res.render('auth/settings', 
+      res.render('auth/settings',
       {
-        title: 'Account Modification', 
-        user: settingsToEdit, 
+        title: 'Account Modification',
+        user: settingsToEdit,
         username: req.user ? req.user.username : ''
       })
       console.log(settingsToEdit);
